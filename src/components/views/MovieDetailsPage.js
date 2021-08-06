@@ -1,7 +1,6 @@
 import customFetch from '../services/fetch';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 
 export default function MovieDetailsPage() {
   const [currentMovie, setCurrentMovie] = useState([]);
