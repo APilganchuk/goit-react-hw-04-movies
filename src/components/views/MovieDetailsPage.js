@@ -1,9 +1,16 @@
 import customFetch from '../services/fetch';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
+import Cast from './Cast';
+import { Link } from 'react-router-dom';
+import { useRouteMatch } from 'react-router';
+import { Route } from 'react-router';
 
 export default function MovieDetailsPage() {
   const [currentMovie, setCurrentMovie] = useState([]);
+
+  const match = useRouteMatch();
+  console.log(match);
 
   const { movieId } = useParams();
   useEffect(() => {
@@ -39,6 +46,12 @@ export default function MovieDetailsPage() {
           </>
         )}
       </div>
+
+      <Route path={`/movies/${movieId}/cast`}>
+        <Link to={`/movies/${movieId}/cast`}>
+          <Cast movieId={movieId} />
+        </Link>
+      </Route>
     </>
   );
 }
