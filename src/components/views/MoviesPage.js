@@ -11,7 +11,7 @@ export default function MoviesPage() {
   const [inputValue, setInputValue] = useState('');
   const [query, setQuery] = useState(qs.parse(search)?.query || '');
   const [movies, setMovies] = useState([]);
-
+  
   useEffect(() => {
     if (query === '') {
       return;
@@ -23,7 +23,7 @@ export default function MoviesPage() {
 
   const onClickSearch = () => {
     setQuery(inputValue);
-    history.push({ pathname, search: `?query=${inputValue}` });
+    history.push({ pathname, search: `query=${inputValue}` });
   };
 
   return (
@@ -45,10 +45,9 @@ export default function MoviesPage() {
               <Link
                 to={{
                   pathname: `${pathname}/${movie.id}`,
-                  search: `?query=${inputValue}`,
                   state: {
                     backUrl: pathname,
-                    searchValue: `?query=${inputValue}`,
+                    searchValue: `query=${query}`,
                   },
                 }}
               >
