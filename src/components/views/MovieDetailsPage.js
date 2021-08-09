@@ -1,14 +1,17 @@
 import customFetch from '../services/fetch';
+import Reviews from './Reviews';
+import Cast from './Cast';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import Cast from './Cast';
 import { Link } from 'react-router-dom';
-import { Route } from 'react-router';
+import { Route, useRouteMatch } from 'react-router';
 import { useHistory, useLocation } from 'react-router';
+import { Switch } from 'react-router';
 
 export default function MovieDetailsPage() {
   const history = useHistory();
   const location = useLocation();
+  const route = useRouteMatch();
 
   const [currentMovie, setCurrentMovie] = useState([]);
   const { poster_path, title, vote_average, overview, genres } = currentMovie;
@@ -24,9 +27,21 @@ export default function MovieDetailsPage() {
       search: location.state?.searchValue || '/',
     });
   };
+
   return (
     <>
-      <button onClick={onClickBack}>back</button>
+      <button
+        style={{
+          padding: 5,
+          marginBottom: 10,
+          color: '#2196f3',
+          cursor: 'pointer',
+          fontWeight: 500,
+        }}
+        onClick={onClickBack}
+      >
+        BACK
+      </button>
 
       <div style={{ display: 'flex' }}>
         {currentMovie && (
@@ -54,12 +69,25 @@ export default function MovieDetailsPage() {
           </>
         )}
       </div>
-
-      <Route path={`/movies/${movieId}/cast`}>
-        <Link to={`/movies/${movieId}/cast`}>
+      <div>
+        <ul>
+          <Link to={`${route.url}/cast`}>
+            <h2>Cast</h2>
+          </Link>
+          <Link to={`${route.url}/reviews`}>
+            <h2>Reviews</h2>
+          </Link>
+        </ul>
+      </div>
+      <Switch>
+        <Route path={`${route.path}/cast`}>
           <Cast movieId={movieId} />
-        </Link>
-      </Route>
+          <Reviews movieId={movieId} />
+        </Route>
+        <Route path={`${route.path}/reviews`}>
+          <Reviews movieId={movieId} />
+        </Route>
+      </Switch>
     </>
   );
 }

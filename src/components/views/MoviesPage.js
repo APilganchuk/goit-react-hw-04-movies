@@ -6,11 +6,11 @@ import { useLocation } from 'react-router';
 import qs from 'query-string';
 
 export default function MoviesPage() {
+  const history = useHistory();
   const { pathname, search } = useLocation();
   const [inputValue, setInputValue] = useState('');
   const [query, setQuery] = useState(qs.parse(search)?.query || '');
   const [movies, setMovies] = useState([]);
-  const history = useHistory();
 
   useEffect(() => {
     if (query === '') {
@@ -26,7 +26,6 @@ export default function MoviesPage() {
     history.push({ pathname, search: `?query=${inputValue}` });
   };
 
-  console.log(inputValue);
   return (
     <>
       <input

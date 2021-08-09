@@ -19,7 +19,15 @@ li {
 }
 
 a {
+  display: block;
   text-decoration: none;
   color: black;
   font-weight: 500;
+}
+p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+h2 {
+  margin-top: 0;
 }

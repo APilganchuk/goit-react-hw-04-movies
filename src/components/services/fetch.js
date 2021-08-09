@@ -10,11 +10,13 @@ const getCurrentMovie = movieId =>
   Axios.get(`${PATH}movie/${movieId}?api_key=${KEY}`)
     .then(({ data }) => data)
     .catch(e => console.log(e));
-const getCastMovie = movieId =>
+const getCast = movieId =>
   Axios.get(`${PATH}movie/${movieId}/credits?api_key=${KEY}`).then(({ data }) => data);
+const getReviews = movieId =>
+  Axios.get(`${PATH}movie/${movieId}/reviews?api_key=${KEY}`).then(({ data }) => data);
 const getMovieToQuery = query =>
   Axios.get(`${PATH}search/movie?api_key=${KEY}&query=${query}`).then(({ data }) => data.results);
 
-const customFetch = { getPopularMovies, getCurrentMovie, getCastMovie, getMovieToQuery };
+const customFetch = { getPopularMovies, getCurrentMovie, getCast,getReviews, getMovieToQuery };
 
 export default customFetch;
