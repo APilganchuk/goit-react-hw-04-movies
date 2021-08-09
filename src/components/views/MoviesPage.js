@@ -1,12 +1,16 @@
 import customFetch from '../services/fetch';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
+import { useLocation } from 'react-router';
+import qs from 'query-string';
 
 export default function MoviesPage() {
+  const { pathname, search } = useLocation();
   const [inputValue, setInputValue] = useState('');
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(qs.parse(search)?.query || '');
   const [movies, setMovies] = useState([]);
-  console.log(movies);
+  const history = useHistory();
 
   useEffect(() => {
     if (query === '') {
@@ -17,6 +21,12 @@ export default function MoviesPage() {
 
   const onInputChange = e => setInputValue(e.currentTarget.value);
 
+  const onClickSearch = () => {
+    setQuery(inputValue);
+    history.push({ pathname, search: `?query=${inputValue}` });
+  };
+
+  console.log(inputValue);
   return (
     <>
       <input
@@ -25,14 +35,26 @@ export default function MoviesPage() {
         type="text"
         placeholder="what are we looking for?"
       />
-      <button onClick={() => setQuery(inputValue)} type="submit">
+      <button onClick={onClickSearch} type="submit">
         SEARCH
       </button>
+
       <ul style={{ marginTop: 15 }}>
-        {movies &&
+        {movies.length > 0 &&
           movies.map(movie => (
             <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+              <Link
+                to={{
+                  pathname: `${pathname}/${movie.id}`,
+                  search: `?query=${inputValue}`,
+                  state: {
+                    backUrl: pathname,
+                    searchValue: `?query=${inputValue}`,
+                  },
+                }}
+              >
+                {movie.title}
+              </Link>
             </li>
           ))}
       </ul>

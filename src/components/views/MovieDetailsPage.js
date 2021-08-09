@@ -3,23 +3,31 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import Cast from './Cast';
 import { Link } from 'react-router-dom';
-import { useRouteMatch } from 'react-router';
 import { Route } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 
 export default function MovieDetailsPage() {
-  const [currentMovie, setCurrentMovie] = useState([]);
+  const history = useHistory();
+  const location = useLocation();
 
-  const match = useRouteMatch();
-  console.log(match);
+  const [currentMovie, setCurrentMovie] = useState([]);
+  const { poster_path, title, vote_average, overview, genres } = currentMovie;
 
   const { movieId } = useParams();
   useEffect(() => {
     customFetch.getCurrentMovie(movieId).then(setCurrentMovie);
   }, [movieId]);
 
-  const { poster_path, title, vote_average, overview, genres } = currentMovie;
+  const onClickBack = () => {
+    history.push({
+      pathname: location.state?.backUrl || '/',
+      search: location.state?.searchValue || '/',
+    });
+  };
   return (
     <>
+      <button onClick={onClickBack}>back</button>
+
       <div style={{ display: 'flex' }}>
         {currentMovie && (
           <>

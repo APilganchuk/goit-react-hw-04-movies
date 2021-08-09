@@ -13,18 +13,10 @@ const App = () => {
     <Container>
       <AppBar />
       <Switch>
-        <Route path="/" exact>
-          <HomePage />
-        </Route>
-        <Route path="/movies" exact>
-          <MoviesPage />
-        </Route>
-        <Route path="/movies/:movieId">
-          <MovieDetailsPage />
-        </Route>
-        <Route>
-          <NotFoundView />
-        </Route>
+        <Route path="/" exact component={HomePage}></Route>
+        <Route path="/movies/" exact component={MoviesPage}></Route>
+        <Route path="/movies/:movieId" component={MovieDetailsPage}></Route>
+        <Route component={NotFoundView}></Route>
       </Switch>
     </Container>
   );

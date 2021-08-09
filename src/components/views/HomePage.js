@@ -11,11 +11,18 @@ export default function HomePage() {
 
   return (
     <>
+      <h2>Trending movies:</h2>
       <ul>
         {popMovies &&
           popMovies.map(movie => (
             <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+              <Link
+                to={{
+                  pathname: `/movies/${movie.id}`,
+                }}
+              >
+                {movie.title}
+              </Link>
             </li>
           ))}
       </ul>
