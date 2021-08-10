@@ -1,3 +1,6 @@
+import { ToastContainer, toast, Zoom } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import customFetch from '../services/fetch';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -11,7 +14,7 @@ export default function MoviesPage() {
   const [inputValue, setInputValue] = useState('');
   const [query, setQuery] = useState(qs.parse(search)?.query || '');
   const [movies, setMovies] = useState([]);
-  
+
   useEffect(() => {
     if (query === '') {
       return;
@@ -22,7 +25,10 @@ export default function MoviesPage() {
   const onInputChange = e => setInputValue(e.currentTarget.value);
 
   const onClickSearch = () => {
-    setQuery(inputValue);
+    setQuery(inputValue.trim());
+    if (inputValue.trim() === '') {
+      toast.warn('The field must not be empty!', { color: 'black' });
+    }
     history.push({ pathname, search: `query=${inputValue}` });
   };
 
@@ -56,6 +62,7 @@ export default function MoviesPage() {
             </li>
           ))}
       </ul>
+      <ToastContainer autoClose={3000} style={{ color: 'black' }} transition={Zoom} />
     </>
   );
 }
