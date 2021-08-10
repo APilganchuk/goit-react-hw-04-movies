@@ -45,7 +45,7 @@ export default function MoviesPage() {
       </button>
 
       <ul style={{ marginTop: 15 }}>
-        {movies.length > 0 &&
+        {movies.length > 0 ? (
           movies.map(movie => (
             <li key={movie.id}>
               <Link
@@ -60,7 +60,10 @@ export default function MoviesPage() {
                 {movie.title}
               </Link>
             </li>
-          ))}
+          ))
+        ) : (
+          <h2>Oops..Nothing found!</h2>
+        )}
       </ul>
       <ToastContainer autoClose={3000} style={{ color: 'black' }} transition={Zoom} />
     </>
