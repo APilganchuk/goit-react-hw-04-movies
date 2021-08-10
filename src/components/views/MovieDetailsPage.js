@@ -70,14 +70,20 @@ export default function MovieDetailsPage() {
         )}
       </div>
       <div>
-        <ul>
+        <nav
+          style={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            width: 300,
+          }}
+        >
           <Link to={`${route.url}/cast`}>
             <h2>Cast</h2>
           </Link>
           <Link to={`${route.url}/reviews`}>
             <h2>Reviews</h2>
           </Link>
-        </ul>
+        </nav>
       </div>
       <Switch>
         <Route path={`${route.path}/cast`}>

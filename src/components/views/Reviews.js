@@ -11,7 +11,7 @@ export default function Reviews({ movieId }) {
   return (
     <div>
       <ul>
-        {results === [] ? (
+        {results && results.length > 0 ? (
           results.map(item => (
             <li key={item.id}>
               <b>{item.author}:</b>
