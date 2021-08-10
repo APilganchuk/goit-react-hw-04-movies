@@ -24,7 +24,7 @@ export default function MovieDetailsPage() {
   const onClickBack = () => {
     history.push({
       pathname: location.state?.backUrl || '/',
-      search: location.state?.searchValue || '/',
+      search: location.state?.searchValue,
     });
   };
 
