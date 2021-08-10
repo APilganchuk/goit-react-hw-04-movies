@@ -77,6 +77,7 @@ export default function MovieDetailsPage() {
             width: 300,
           }}
         >
+          {console.log(`${route.path}/cast`)}
           <Link to={`${route.url}/cast`}>
             <h2>Cast</h2>
           </Link>
@@ -88,7 +89,6 @@ export default function MovieDetailsPage() {
       <Switch>
         <Route path={`${route.path}/cast`}>
           <Cast movieId={movieId} />
-          <Reviews movieId={movieId} />
         </Route>
         <Route path={`${route.path}/reviews`}>
           <Reviews movieId={movieId} />
