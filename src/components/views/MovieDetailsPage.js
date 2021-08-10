@@ -77,7 +77,6 @@ export default function MovieDetailsPage() {
             width: 300,
           }}
         >
-          {console.log(`${route.path}/cast`)}
           <Link to={`${route.url}/cast`}>
             <h2>Cast</h2>
           </Link>
