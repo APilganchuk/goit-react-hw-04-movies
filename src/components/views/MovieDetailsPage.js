@@ -81,8 +81,8 @@ export default function MovieDetailsPage() {
             to={{
               pathname: `${route.url}/cast`,
               state: {
-                backUrl: `/movies`,
-                searchValue: location.state?.searchValue,
+                backUrl: `${location.state?.searchValue ? `/movies` : `/`}`,
+                searchValue: location.state?.searchValue || '',
               },
             }}
           >
@@ -92,8 +92,8 @@ export default function MovieDetailsPage() {
             to={{
               pathname: `${route.url}/reviews`,
               state: {
-                backUrl: `/movies`,
-                searchValue: location.state?.searchValue,
+                backUrl: `${location.state?.searchValue ? `/movies` : `/`}`,
+                searchValue: location.state?.searchValue || '',
               },
             }}
           >
