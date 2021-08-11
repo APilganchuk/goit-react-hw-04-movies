@@ -1,4 +1,4 @@
-import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { ToastContainer, toast, Flip } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import customFetch from '../services/fetch';
@@ -29,6 +29,7 @@ export default function MoviesPage() {
     if (inputValue.trim() === '') {
       toast.warn('The field must not be empty!', { color: 'black' });
     }
+
     history.push({ pathname, search: `query=${inputValue}` });
   };
 
@@ -62,7 +63,7 @@ export default function MoviesPage() {
             </li>
           ))}
       </ul>
-      <ToastContainer autoClose={3000} style={{ color: 'black' }} transition={Zoom} />
+      <ToastContainer autoClose={2000} style={{ color: 'black' }} transition={Flip} />
     </>
   );
 }

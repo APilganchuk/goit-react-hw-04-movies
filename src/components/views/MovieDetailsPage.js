@@ -77,10 +77,26 @@ export default function MovieDetailsPage() {
             width: 300,
           }}
         >
-          <Link to={`${route.url}/cast`}>
+          <Link
+            to={{
+              pathname: `${route.url}/cast`,
+              state: {
+                backUrl: `/movies`,
+                searchValue: location.state?.searchValue,
+              },
+            }}
+          >
             <h2>Cast</h2>
           </Link>
-          <Link to={`${route.url}/reviews`}>
+          <Link
+            to={{
+              pathname: `${route.url}/reviews`,
+              state: {
+                backUrl: `/movies`,
+                searchValue: location.state?.searchValue,
+              },
+            }}
+          >
             <h2>Reviews</h2>
           </Link>
         </nav>

@@ -12,7 +12,7 @@ export default function Cast({ movieId }) {
   return (
     <div>
       <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {cast &&
+        {cast && cast.length > 0 ? (
           cast.map(({ id, profile_path, name }) => (
             <li key={id}>
               {profile_path ? (
@@ -28,7 +28,10 @@ export default function Cast({ movieId }) {
               )}
               <p>{name}</p>
             </li>
-          ))}
+          ))
+        ) : (
+          <b>Oops...nothing found!</b>
+        )}
       </ul>
     </div>
   );
